@@ -13,9 +13,9 @@ def check_door():
 	json_object = data.json()
 	status = json_object['OCCUPIED']
 	if status == "true":
-		return False
+		return "false"
 	else: 
-		return True
+		return "true"
 
 # updates firebase to the new state
 def change_occupied_state(state):

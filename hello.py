@@ -6,12 +6,14 @@ import occupiedo
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 	 
 while True:
     input_state = GPIO.input(17)
-    if input_state == False:
+    if input_state == True:
 		print('Button Pressed')
 		current_state = occupiedo.check_door()
-		occupiedo.change_occupied_state(current_state)
+		#check if physical doors input is the same as firebase if not - update firebase
+		if current_state != input_state:
+			occupiedo.change_occupied_state(current_state)
 		time.sleep(0.2)

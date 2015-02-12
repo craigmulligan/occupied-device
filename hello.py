@@ -13,9 +13,11 @@ while True:
     if input_state == True:
 		print('Button Pressed')
 		current_state = occupiedo.check_door()
+		print "input_state: "+input_state
+		print "current_state: "+current_state
+
 		#check if physical doors input is the same as firebase if not - update firebase
 		if current_state != input_state:
 			#door state has changed so fire off actions
-			#brap!
 			occupiedo.change_occupied_state(current_state)
 		time.sleep(0.2)

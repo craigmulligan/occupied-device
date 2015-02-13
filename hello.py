@@ -9,7 +9,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 	 
 while True:
-    input_state = GPIO.input(17)
+	input_state = GPIO.input(17)
 	fb_state = occupiedo.check_door()
 	if fb_state == "true":
 		state = 1

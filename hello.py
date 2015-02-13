@@ -11,10 +11,7 @@ GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 while True:
 	input_state = GPIO.input(17)
 	fb_state = occupiedo.check_door()
-	if fb_state == "true":
-		state = 1
-	else:
-		state = 0
+	state = occupiedo.binarize(fb_state)
 	print "input_state: " + str(input_state)
 	print "fb_state: " + str(state)
 	#check if physical doors input is the same as firebase if not - update firebase

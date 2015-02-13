@@ -33,6 +33,12 @@ def send_text(number, name):
 	    from_=twilio_number) # Replace with your Twilio number
 	print "text sent"
 
+def binarize(fb_state): 
+	if fb_state == "true":
+		return 1
+	else:
+		return 0
+
 # gets next in queue
 def get_next_in_queue():
 	url = fbRef +'queue.json?orderBy="$key"&limitToFirst=1&print=pretty'

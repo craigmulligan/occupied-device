@@ -6,11 +6,12 @@ import occupiedo
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 	 
 while True:
 	input_state = GPIO.input(17)
 	fb_state = occupiedo.check_door()
+	#covert fb_state to 1 || 0 to compare against input_state
 	state = occupiedo.binarize(fb_state)
 	print "input_state: " + str(input_state)
 	print "fb_state: " + str(state)

@@ -31,9 +31,13 @@ def change_occupied_state(state):
 	# only send text if toilet is open
 	if state == "false":
 		get_next_in_queue()
-		keen.add_event("TOILET OPEN")
+		keen.add_event("door", {
+        "state": "open",
+    	})
 	else:
-		keen.add_event("TOILET CLOSED")
+		keen.add_event("door", {
+        "state": "closed",
+    	})
 
 # sends text to next in queue
 def send_text(number, name):

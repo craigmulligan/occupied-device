@@ -3,16 +3,16 @@ from firebase import firebase
 import requests
 from twilio.rest import TwilioRestClient
 from keen.client import KeenClient
-from config import fbRef, twilio_acc_id, twilio_acc_auth_token, twilio_number, keen.project_id, keen.write_key, keen.read_key, keen.master_key
+from config import fbRef, twilio_acc_id, twilio_acc_auth_token, twilio_number, keen_project_id, keen_write_key, keen_read_key, keen_master_key
 
 FIREBASE = firebase.FirebaseApplication(fbRef, None)
 
-# keen = KeenClient(
-#     project_id=keen.project_id,
-#     write_key=keen.write_key,
-#     read_key=keen.read_key,
-#     master_key=keen.master_key
-# )
+keen = KeenClient(
+    project_id=keen_project_id,
+    write_key=keen_write_key,
+    read_key=keen_read_key,
+    master_key=keen_master_key
+)
 
 # Checks the current state of door firebase
 def check_door(): 

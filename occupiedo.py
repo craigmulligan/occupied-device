@@ -7,12 +7,12 @@ from config import fbRef, twilio_acc_id, twilio_acc_auth_token, twilio_number, k
 
 FIREBASE = firebase.FirebaseApplication(fbRef, None)
 
-keen = KeenClient(
-    project_id=keen.project_id,
-    write_key=keen.write_key,
-    read_key=keen.read_key,
-    master_key=keen.master_key
-)
+# keen = KeenClient(
+#     project_id=keen.project_id,
+#     write_key=keen.write_key,
+#     read_key=keen.read_key,
+#     master_key=keen.master_key
+# )
 
 # Checks the current state of door firebase
 def check_door(): 

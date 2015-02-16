@@ -6,8 +6,9 @@ import occupiedo
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-	 
+GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+# TODO: use multi thread interupts instead of loop.	 
 while True:
 	input_state = GPIO.input(17)
 	fb_state = occupiedo.check_door()
@@ -19,4 +20,4 @@ while True:
 	if state != input_state:
 		#door state has changed so fire off actions
 		occupiedo.change_occupied_state(fb_state)
-	time.sleep(0.2)
+	time.sleep(0.5)

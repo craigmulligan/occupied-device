@@ -11,4 +11,4 @@ RUN pip install RPi.Gpio requests python-firebase twilio keen
 
 ADD . /app
 
-CMD ["python", "/app/hello.py"]
+CMD ["python", "/app/init.py"]

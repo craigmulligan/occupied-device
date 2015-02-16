@@ -27,17 +27,19 @@ def check_door():
 
 # updates firebase to the new state
 def change_occupied_state(state):
-	result = FIREBASE.put('/', 'OCCUPIED', state)
-	# only send text if toilet is open
+	FIREBASE.put('/', 'OCCUPIED', state)
 	if state == "false":
+		# only send text if toilet is open
 		get_next_in_queue()
-		keen.add_event("door", {
-        "state": "open",
-    	})
+		if keen:
+			keen.add_event("door", {
+	        "state": "open",
+	    	})
 	else:
-		keen.add_event("door", {
-        "state": "closed",
-    	})
+		if keen: 
+			keen.add_event("door", {
+	        "state": "closed",
+	    	})
 
 # sends text to next in queue
 def send_text(number, name):

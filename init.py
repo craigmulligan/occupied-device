@@ -7,17 +7,17 @@ import occupiedo
 GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+prev_state = 0;
 
 # TODO: use multi thread interupts instead of loop.	 
 while True:
 	input_state = GPIO.input(17)
-	fb_state = occupiedo.check_door()
-	#covert fb_state to 1 || 0 to compare against input_state
-	state = occupiedo.binarize(fb_state)
 	print "input_state: " + str(input_state)
-	print "fb_state: " + str(state)
+	print "prev_state: " + str(prev_state)
 	#check if physical doors input is the same as firebase if not - update firebase
-	if state != input_state:
+	if input_state != prev_state:
 		#door state has changed so fire off actions
-		occupiedo.change_occupied_state(fb_state)
-	time.sleep(0.5)
+		occupiedo.change_occupied_state(input_state)
+
+	prev_state = input_state
+	time.sleep(0.2)

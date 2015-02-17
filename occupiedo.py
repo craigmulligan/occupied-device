@@ -7,22 +7,26 @@ from config import fbRef, twilio_acc_id, twilio_acc_auth_token, twilio_number
 FIREBASE = firebase.FirebaseApplication(fbRef, None)
 
 # Checks the current state of door firebase
-def check_door(): 
-	url = fbRef + '.json?orderBy="$key"&limitToFirst=1&print=pretty'
-	data = requests.get(url)
-	json_object = data.json()
-	status = json_object['occupied']
-	if status == "true":
-		return "false"
-	else: 
-		return "true"
+# def check_door(): 
+# 	url = fbRef + '.json?orderBy="$key"&limitToFirst=1&print=pretty'
+# 	data = requests.get(url)
+# 	json_object = data.json()
+# 	status = json_object['occupied']
+# 	if status == "true":
+# 		return "false"
+# 	else: 
+# 		return "true"
 
 # updates firebase to the new state
 def change_occupied_state(state):
-	FIREBASE.put('/', 'occupied', state)
-	if state == "false":
-		# only send text if toilet is open
+	if state == 0:
+		#toilet is now unoccupied
+		FIREBASE.put('/', 'occupied', 'false')
+		#send text to next person in the queue
 		get_next_in_queue()
+	else:
+		#toilet is now occupied 
+		FIREBASE.put('/', 'occupied', 'true')
 
 # sends text to next in queue
 def send_text(number, name):
@@ -33,11 +37,6 @@ def send_text(number, name):
 	    from_=twilio_number) # Replace with your Twilio number
 	print "text sent"
 
-def binarize(fb_state): 
-	if fb_state == "true":
-		return 1
-	else:
-		return 0
 
 # gets next in queue
 def get_next_in_queue():

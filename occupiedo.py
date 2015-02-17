@@ -11,7 +11,7 @@ def check_door():
 	url = fbRef + '.json?orderBy="$key"&limitToFirst=1&print=pretty'
 	data = requests.get(url)
 	json_object = data.json()
-	status = json_object['OCCUPIED']
+	status = json_object['occupied']
 	if status == "true":
 		return "false"
 	else: 
@@ -19,7 +19,7 @@ def check_door():
 
 # updates firebase to the new state
 def change_occupied_state(state):
-	FIREBASE.put('/', 'OCCUPIED', state)
+	FIREBASE.put('/', 'occupied', state)
 	if state == "false":
 		# only send text if toilet is open
 		get_next_in_queue()

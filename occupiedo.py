@@ -2,17 +2,9 @@ import os
 from firebase import firebase
 import requests
 from twilio.rest import TwilioRestClient
-from keen.client import KeenClient
-from config import fbRef, twilio_acc_id, twilio_acc_auth_token, twilio_number, keen_project_id, keen_write_key, keen_read_key, keen_master_key
+from config import fbRef, twilio_acc_id, twilio_acc_auth_token, twilio_number
 
 FIREBASE = firebase.FirebaseApplication(fbRef, None)
-
-keen = KeenClient(
-    project_id=keen_project_id,
-    write_key=keen_write_key,
-    read_key=keen_read_key,
-    master_key=keen_master_key
-)
 
 # Checks the current state of door firebase
 def check_door(): 
@@ -31,15 +23,6 @@ def change_occupied_state(state):
 	if state == "false":
 		# only send text if toilet is open
 		get_next_in_queue()
-		if keen:
-			keen.add_event("door", {
-	        "state": "open",
-	    	})
-	else:
-		if keen: 
-			keen.add_event("door", {
-	        "state": "closed",
-	    	})
 
 # sends text to next in queue
 def send_text(number, name):

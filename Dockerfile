@@ -7,7 +7,7 @@ RUN apt-get upgrade -y
 
 RUN apt-get install -y python wget build-essential python-dev python-pip
 
-RUN pip install RPi.Gpio requests python-firebase twilio keen
+RUN pip install RPi.Gpio requests python-firebase twilio
 
 ADD . /app
 

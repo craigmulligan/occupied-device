@@ -6,17 +6,6 @@ from config import fbRef, twilio_acc_id, twilio_acc_auth_token, twilio_number
 
 FIREBASE = firebase.FirebaseApplication(fbRef, None)
 
-# Checks the current state of door firebase
-# def check_door(): 
-# 	url = fbRef + '.json?orderBy="$key"&limitToFirst=1&print=pretty'
-# 	data = requests.get(url)
-# 	json_object = data.json()
-# 	status = json_object['occupied']
-# 	if status == "true":
-# 		return "false"
-# 	else: 
-# 		return "true"
-
 # updates firebase to the new state
 def change_occupied_state(state):
 	if state == 0:
@@ -55,7 +44,7 @@ def get_next_in_queue():
 		print "no one in queue"
 	else:
 		name = person['name']
-		number = os.getenv(name, '+447479559980')
+		number = os.getenv(name)
 		# send text
 		send_text(number, name)
 		# delete entry
